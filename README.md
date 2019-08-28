@@ -1,1 +1,3 @@
-"# design-pattern-lisp" 
+# design-pattern-lisp
+
+- Factory Method
