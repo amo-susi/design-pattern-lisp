@@ -24,7 +24,7 @@
   (incf (get-length book-shelf)))
 
 (defclass book-shelf-iterator (iiterator)
-  ((book-shelf :accessor book-shelf :initarg :book-shelf)
+  ((book-shelf :accessor book-shelf :initform (make-instance 'book-shelf) :initarg :book-shelf)
    (index :accessor index :initform 0 :initarg :index)))
 
 (defmethod iterator (book-shelf book-shelf)
@@ -34,4 +34,10 @@
   (setf (book-shelf book-shelf-iterator) book-shelf)
   (setf (index book-shelf-iterator) 0))
 
-(defmethod has-next ()
+(defmethod has-next ((book-shelf-iterator book-shelf-iterator))
+  (< (index book-shelf-iterator) (get-length (book-shelf book-shelf-iterator))))
+
+(defmethod next ((book-shelf-iterator book-shelf-iterator))
+  (prog1
+      (get-book-at (index book-shelf-iterator) (book-shelf book-shelf-iterator))
+    (incf (index book-shelf-iterator))))
