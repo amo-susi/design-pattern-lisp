@@ -1,5 +1,5 @@
 
-```common-lisp
+```Lisp
 (ql:quickload :adapter)
 
 (setf pnt (adapter:make-print-banner "Hello"))
