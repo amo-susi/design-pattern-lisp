@@ -1,4 +1,5 @@
-```
+
+```common-lisp
 (ql:quickload :adapter)
 
 (setf pnt (adapter:make-print-banner "Hello"))
