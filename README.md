@@ -1,4 +1,7 @@
 # design-pattern-lisp
 
-- Factory Method
 - Iterator
+- Adapter
+- Template Method
+- Factory Method
+- Singleton
