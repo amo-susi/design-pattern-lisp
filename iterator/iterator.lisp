@@ -10,10 +10,16 @@
 (defclass book ()
   ((name :accessor name :initform "" :initarg :name)))
 
+(defun make-book (str)
+  (make-instance 'book :name str))
+
 ;; 本棚を表すクラス
 (defclass book-shelf (iaggregate)
   ((books :accessor books :initform () :initarg :books)
    (last :accessor get-length :initform 0 :initarg :last)))
+
+(defun make-book-shelf ()
+  (make-instance 'book-shelf))
 
 (defmethod append-book ((book book) (book-shelf book-shelf))
   (push book (books book-shelf))

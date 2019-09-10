@@ -2,9 +2,9 @@
 
 (defpackage iterator
   (:use :cl)
-  (:export :book-shelf
+  (:export :make-book-shelf
 	   :append-book
-	   :book
+	   :make-book
 	   :get-iterator
 	   :has-next
 	   :next
