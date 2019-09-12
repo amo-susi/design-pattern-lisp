@@ -30,3 +30,21 @@
 (defmethod set-caption ((caption string) (tray tray))
   (setf (caption tray) caption))
 
+;; HTMLのページを生成する
+(defclass page ()
+  ((title :accessor title :initform "" :initarg :title)
+   (author :accessor author :initform "" :initarg :title)
+   (content :accessor content :initform () :initarg :content)))
+
+(defmethod make-page ((title string) (author string))
+  (make-instance 'page :title title :author author))
+
+(defmethod add ((item item) (page page))
+  (push item (content page)))
+
+(defmethod output ((page page))
+  (print (make-html page)))
+
+;; 部品を作成する
+(defclass factory () ())
+

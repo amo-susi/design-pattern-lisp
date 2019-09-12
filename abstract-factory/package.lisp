@@ -4,4 +4,5 @@
   (:use :cl))
 
 (defpackage list-factory
-  (:use :cl))
+  (:use :cl
+	:list-factory))
