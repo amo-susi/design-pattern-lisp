@@ -6,6 +6,9 @@
 (defclass id-card-factory (factory)
   ((owners :accessor owners :initform () :initarg :owners)))
 
+(defun make-id-card-factory ()
+  (make-instance 'id-card-factory))
+
 (defmethod create-product ((owner string))
   (format t "~Aのカードを作ります。~%" owner)
   (make-instance 'id-card :owner owner))

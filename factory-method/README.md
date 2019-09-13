@@ -1,7 +1,7 @@
 ```common-lisp
 (ql:quickload :factory-method)
 
-(setf factory (make-instance 'idcard:id-card-factory))
+(setf factory (make-id-card-factory))
 
 (setf card1 (idcard:create "foo" factory))
 (setf card2 (idcard:create "bar" factory))

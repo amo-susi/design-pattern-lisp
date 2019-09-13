@@ -8,6 +8,6 @@
 (defpackage idcard
   (:use :cl
 	:framework)
-  (:export :id-card-factory
+  (:export :make-id-card-factory
 	   :create
 	   :use))
