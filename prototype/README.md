@@ -3,7 +3,7 @@
 
 (setf manager (prototype:make-manager))
 
-(setf upen (prototype:make-unerline-pen #\-))
+(setf upen (prototype:make-underline-pen #\-))
 
 (setf mbox (prototype:make-message-box #\*))
 
