@@ -1,8 +1,39 @@
 (in-package :common-lisp)
 
-(defpackage abstract-factory
-  (:use :cl))
+(defpackage list-factory
+  (:export :make-html))
+
+(defpackage framework
+  (:use :cl)
+  (:import-from :list-factory
+		:make-html)
+  (:export :make-factory
+	   :page
+	   :factory
+	   :tray
+	   :link
+	   :caption
+	   :url
+	   :title
+	   :author
+	   :content
+	   :add
+	   :output))
 
 (defpackage list-factory
   (:use :cl
-	:list-factory))
+	:framework)
+  (:export :create-link
+	   :create-tray
+	   :create-page))
+
+(defpackage abstract-factory
+  (:use :cl
+	:framework
+	:list-factory)
+  (:export :make-factory
+	   :create-link
+	   :create-tray
+	   :create-page
+	   :add
+	   :output))

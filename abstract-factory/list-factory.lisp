@@ -7,7 +7,7 @@
   (make-instance 'list-link :caption caption :url url))
 
 (defmethod make-html ((list-link list-link))
-  (format nil "<li><a href=\"~A\">~A</a></li>~%"
+  (format t "<li><a href=\"~A\">~A</a></li>~%"
 	  (url list-link)
 	  (caption list-link)))
 
@@ -18,20 +18,9 @@
   (make-instance 'list-tray :caption caption))
 
 (defmethod make-html ((list-tray list-tray))
-  (with-output-to-string (*standard-output*)
-    (princ "<li>")
-    (terpri)
-    (princ (caption list-tray))
-    (terpri)
-    (princ "<ul>")
-    (terpri)
-
-    (mapc #'make-html (tray list-tray))
-
-    (princ "</ul>")
-    (terpri)
-    (princ "</li>")
-    (terpri)))
+  (format t "<li>~%~A~%<ul>~%" (caption list-tray))
+  (mapc #'make-html (tray list-tray))
+  (format t "</ul>~%</li>~%"))
 
 ;; 具体的な部品：HTMLのページを表すクラス
 (defclass  list-page (page) ())
@@ -40,10 +29,9 @@
   (make-instance 'list-page :title title :author author))
 
 (defmethod make-html ((list-page list-page))
-  (with-output-to-string (*standard-output*)
-    (format t "<html><head><title>~A</title></head>~%<body>~%<h1>~A</h1><ul>~%" (title list-page) (title list-page))
-    (mapc #'make-html (content list-page))
-    (format t "</ul>~%<hr><address>~A</address></body></html>~%")))
+  (format t "<html><head><title>~A</title></head>~%<body>~%<h1>~A</h1><ul>~%" (title list-page) (title list-page))
+  (mapc #'make-html (content list-page))
+  (format t "</ul>~%<hr><address>~A</address></body></html>~%" (author list-page)))
 
 ;; 具体的な工場を表すクラス(ListLink, ListTray, ListPageを作る)
 (defclass list-factory (factory) ())
@@ -51,9 +39,8 @@
 (defmethod create-link ((caption string) (url string) (list-factory list-factory))
   (make-list-link caption url))
 
-(defmethod create-tray ((caption string) (create-link create-link))
+(defmethod create-tray ((caption string) (list-factory list-factory))
   (make-list-tray caption))
 
-(defmethod create-page ((title string) (author string))
-  (make-list-page author))
-
+(defmethod create-page ((title string) (author string) (list-factory list-factory))
+  (make-list-page title author))
