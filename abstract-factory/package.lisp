@@ -7,7 +7,7 @@
   (:use :cl)
   (:import-from :list-factory
 		:make-html)
-  (:export :make-factory
+  (:export :get-factory
 	   :page
 	   :factory
 	   :tray
@@ -31,7 +31,7 @@
   (:use :cl
 	:framework
 	:list-factory)
-  (:export :make-factory
+  (:export :get-factory
 	   :create-link
 	   :create-tray
 	   :create-page
