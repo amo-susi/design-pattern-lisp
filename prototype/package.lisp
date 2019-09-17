@@ -4,16 +4,16 @@
   (:use :cl)
   (:export :product
 	   :use
-	   :manager
+	   :make-manager
 	   :register
 	   :create))
 
 (defpackage prototype
   (:use :cl
 	:framework)
-  (:export :manager
-	   :message-box
-	   :underline-pen
+  (:export :make-manager
+	   :make-message-box
+	   :make-underline-pen
 	   :use
 	   :register
 	   :create))

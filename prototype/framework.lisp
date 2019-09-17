@@ -9,6 +9,9 @@
 (defclass manager ()
   ((showcase :accessor showcase :initform (make-hash-table) :initarg :showcase)))
 
+(defun make-manager ()
+  (make-instance 'manager))
+
 ;; 引数で渡された雛形インスタンスをshowcase内に格納する
 (defmethod register ((name symbol) (proto product) (manager manager))
   (setf (gethash name (showcase manager)) proto))

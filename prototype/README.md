@@ -1,13 +1,13 @@
 ```common-lisp
 (ql:quickload :prototype)
 
-(setf manager (make-instance 'prototype:manager))
+(setf manager (prototype:make-manager))
 
-(setf upen (make-instance 'prototype:unerline-pen :ulchar #\-))
+(setf upen (prototype:make-unerline-pen #\-))
 
-(setf mbox (make-instance 'prototype:message-box :decochar #\*))
+(setf mbox (prototype:make-message-box #\*))
 
-(setf sbox (make-instance 'prototype:message-box :decochar #\/))
+(setf sbox (prototype:make-message-box #\/))
 
 (prototype:register 'strong-message upen manager)
 (prototype:register 'warning-box mbox manager)
