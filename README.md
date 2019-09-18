@@ -9,3 +9,4 @@
 - Builder
 - Abstract Factory
 - Bridge
+- Composite
