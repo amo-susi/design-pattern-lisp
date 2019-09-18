@@ -7,6 +7,6 @@
 - [Singleton](https://github.com/a-nano/design-pattern-lisp/tree/master/singleton)
 - [Prototype](https://github.com/a-nano/design-pattern-lisp/tree/master/prototype)
 - Builder
-- Abstract Factory
-- Bridge
-- Composite
+- [Abstract Factory](https://github.com/a-nano/design-pattern-lisp/tree/master/abstract-factory)
+- [Bridge](https://github.com/a-nano/design-pattern-lisp/tree/master/bridge)
+- [Composite](https://github.com/a-nano/design-pattern-lisp/tree/master/composite)
