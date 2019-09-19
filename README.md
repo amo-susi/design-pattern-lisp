@@ -13,7 +13,7 @@
 - [Composite](https://github.com/a-nano/design-pattern-lisp/tree/master/composite)
 - [Decorator](https://github.com/a-nano/design-pattern-lisp/tree/master/decorator)
 - Visitor (Waiting)
-- Chain of Responsibility (Waiting)
+- [Chain of Responsibility](https://github.com/a-nano/design-pattern-lisp/tree/master/chain-of-responsibility)
 - Facade (Waiting)
 - Mediator (Waiting)
 - State (Waiting)
