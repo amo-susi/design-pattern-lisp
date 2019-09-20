@@ -10,7 +10,10 @@
 
 ;; ひとつの文章を作成するクラス
 (defclass director ()
-  ((builder :accessor builder  :initarg :builder)))
+  ((builder :accessor builder :initarg :builder)))
+
+(defmethod make-director ((builder builder))
+  (make-instance 'director :builder builder))
 
 (defmethod construct ((director director))
   (make-title "Greeting" (builder director))
@@ -23,6 +26,9 @@
 ;; プレーンテキストを使って文章作成するクラス
 (defclass text-builder (builder)
   ((buffer :accessor buffer :initform () :initarg :buffer)))
+
+(defmethod make-text-builder ()
+  (make-instance 'text-builder))
 
 (defmethod make-title ((title string) (text-builder text-builder))
   (push "============================" (buffer text-builder))
@@ -43,6 +49,9 @@
 ;; HTMLファイルを使って文章を作成するクラス
 (defclass html-builder (builder)
   ((buffer :accessor buffer :initform () :initarg :buffer)))
+
+(defmethod make-html-builder ()
+  (make-instance 'html-builder))
 
 (defmethod make-title ((title string) (html-builder html-builder))
   (push (format nil "<html><head><title>~A</title></head><body>" title)

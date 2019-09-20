@@ -2,8 +2,8 @@
 
 (defpackage builder
   (:use :cl)
-  (:export :director
+  (:export :make-director
+	   :make-text-builder
+	   :make-html-builder
 	   :construct
-	   :text-builder
-	   :html-builder
 	   :get-result))
