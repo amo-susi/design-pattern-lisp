@@ -6,7 +6,7 @@
 - [Factory Method](https://github.com/a-nano/design-pattern-lisp/tree/master/factory-method)
 - [Singleton](https://github.com/a-nano/design-pattern-lisp/tree/master/singleton)
 - [Prototype](https://github.com/a-nano/design-pattern-lisp/tree/master/prototype)
-- Builder (Working)
+- [Builder](https://github.com/a-nano/design-pattern-lisp/tree/master/builder)
 - [Abstract Factory](https://github.com/a-nano/design-pattern-lisp/tree/master/abstract-factory)
 - [Bridge](https://github.com/a-nano/design-pattern-lisp/tree/master/bridge)
 - Strategy (Waiting)
