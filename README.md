@@ -18,6 +18,6 @@
 - Mediator (Waiting)
 - State (Waiting)
 - Flyweight (Waiting)
-- Proxy (Waiting)
+- [Proxy](https://github.com/a-nano/design-pattern-lisp/tree/master/proxy)
 - Command (Waiting)
 - Interpreter (Waiting)
