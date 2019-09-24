@@ -1,11 +1,11 @@
 ```common-lisp
 (ql:quickload :proxy)
 
-(setf iprintable (proxy:make-printer-proxy "²“¡"))
+(setf iprintable (proxy:make-printer-proxy "ä½è—¤"))
 
 (proxy:get-printer-name iprintable)
 
-(proxy:set-printer-name "“c’†" iprintable)
+(proxy:set-printer-name "ç”°ä¸­" iprintable)
 
 (proxy:get-printer-name iprintable)
 
