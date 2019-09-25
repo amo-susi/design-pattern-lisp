@@ -17,7 +17,7 @@
 - [Facade](https://github.com/a-nano/design-pattern-lisp/tree/master/facade)
 - Mediator (Waiting)
 - Observer (Waiting)
-- Memento (Waiting)
+- [Memento](https://github.com/a-nano/design-pattern-lisp/tree/master/memento)
 - State (Waiting)
 - Flyweight (Waiting)
 - [Proxy](https://github.com/a-nano/design-pattern-lisp/tree/master/proxy)
