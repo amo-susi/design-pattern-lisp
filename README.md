@@ -16,7 +16,7 @@
 - [Chain of Responsibility](https://github.com/a-nano/design-pattern-lisp/tree/master/chain-of-responsibility)
 - [Facade](https://github.com/a-nano/design-pattern-lisp/tree/master/facade)
 - Mediator (Waiting)
-- Observer (Waiting)
+- [Observer](https://github.com/a-nano/design-pattern-lisp/tree/master/observer)
 - [Memento](https://github.com/a-nano/design-pattern-lisp/tree/master/memento)
 - State (Waiting)
 - Flyweight (Waiting)
