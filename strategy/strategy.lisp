@@ -56,3 +56,77 @@
   (setf (won won-strategy) win))
 
 
+;; 一回前の手から次の手を確立的に計算する戦略
+(defmethod prob-strategy (strategy)
+  ((prev-handvalue :accessor prev-handvalue :initform 0 :initarg :prev-handvalue)
+   (current-handvalue :accessor current-handvalue :initform 0 :initarg :current-handvalue)
+   (history :accessor history :initform '((1 1 1) (1 1 1) (1 1 1)) :initarg :history))))
+
+(defmethod make-prob-strategy ()
+  (make-instance 'prob-strategy))
+
+(defmethod get-sum ((hv integer) (prob-strategy))
+  (loop for x in (nth hv (history prob-strategy))
+     sum x))
+
+(defmethod next-hand ((prob-strategy prob-strategy))
+  (let ((handvalue 0)
+	(bet (random (get-sum (current-handvalue prob-strategy)))))
+    (cond ((< bet (nth (current-handvalue prob-strategy)
+		       (nth 0 (history prob-strategy))))
+	   (setf handvalue 0))
+	  ((< bet (+ (nth (current-handvalue prob-strategy)
+			  (nth 0 (history prob-strategy)))
+		     (nth (current-handvalue prob-strategy)
+			  (nth 1 (history prob-strategy)))))
+	   (setf handvalue 1))
+	  (t (setf handvalue 2)))
+    (setf (prev-handvalue prob-strategy) (current-handvalue prob-strategy))
+    (setf (current-handvalue prob-strategy) handvalue)
+    (get-hand handvalue)))
+
+(defmethod sutdy ((win boolean) (prob-strategy prob-strategy))
+  (if win
+      (incf (nth (current-handvalue prob-strategy)
+		 (nth (prev-handvalue prob-strategy) (history prob-strategy))))
+      (progn
+	(incf (nth (rem (1+ (current-handvalue prob-strategy)) 3)
+		   (nth (prev-handvalue prob-strategy) (history prob-strategy))))
+	(incf (nth (rem (+ (current-handvalue prob-strategy) 2) 3)
+		   (nth (prev-handvalue prob-strategy) (history prob-strategy)))))))
+
+;; じゃんけんのプレイヤーを表すクラス
+(defclass player ()
+  ((name :accessor name :initform "" :initarg :name)
+   (strategy :accessor strategy :initform nil :initarg :strategy)
+   (win-count :accessor win-count :initform 0 :initarg :win-count)
+   (lose-count :accessor lose-count :initform 0 :initarg :lose-count)
+   (game-count :accessor game-count :initform 0 :initarg :game-count)))
+
+(defmethod make-player ((name string) (strategy strategy))
+  (make-instance 'player :name name :strategy strategy))
+
+(defmethod next-hand ((player player))
+  (next-hand (strategy player)))
+
+(defmethod win ((player player))
+  (study ture (strategy player))
+  (incf (win-count player))
+  (incf (game-count player)))
+
+(defmethod lose ((player player))
+  (study true (strategy player))
+  (incf (lose-count player))
+  (incf (game-count player)))
+
+(defmethod even ((player player))
+  (incf (game-count player)))
+
+
+(defmethod to-string ((player player))
+  (format nil "[ ~A :~Agames, ~Awin, ~Alose]~%"
+	  (name player)
+	  (game-count player)
+	  (win-count player)
+	  (lose-count player)))
+
