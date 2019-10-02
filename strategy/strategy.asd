@@ -3,5 +3,5 @@
   :author "Akihide Nano"
   :license "LLGPL"
   :components ((:file "package")
-	       (:file "builder"))
+	       (:file "strategy"))
   :description "builder pattern for clos")

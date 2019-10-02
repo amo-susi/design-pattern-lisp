@@ -7,6 +7,7 @@
 	   :lose
 	   :even
 	   :next-hand
+	   :is-stronger-than
 	   :to-string
 	   :make-won-strategy
 	   :make-prob-strategy))

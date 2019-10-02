@@ -38,7 +38,7 @@
 (defclass strategy () ())
 
 (defgeneric next-hand (instance))
-(defgeneric study (win))
+(defgeneric study (win instance))
 
 ;; 勝ったら次も同じ手を出す戦略
 (defclass won-strategy (strategy)
@@ -49,29 +49,30 @@
   (make-instance 'won-strategy))
 
 (defmethod next-hand ((won-strategy won-strategy))
-  (unless won (setf (prev-hand won-strategy)
-		    (get-hand (random 3)))))
+  (unless (won won-strategy)
+    (setf (prev-hand won-strategy)
+	  (get-hand (random 3)))))
 
-(defmethod study ((win boolean) (won-strategy won-strategy))
+(defmethod study ((win symbol) (won-strategy won-strategy))
   (setf (won won-strategy) win))
 
 
 ;; 一回前の手から次の手を確立的に計算する戦略
-(defmethod prob-strategy (strategy)
+(defclass prob-strategy (strategy)
   ((prev-handvalue :accessor prev-handvalue :initform 0 :initarg :prev-handvalue)
    (current-handvalue :accessor current-handvalue :initform 0 :initarg :current-handvalue)
-   (history :accessor history :initform '((1 1 1) (1 1 1) (1 1 1)) :initarg :history))))
+   (history :accessor history :initform '((1 1 1) (1 1 1) (1 1 1)) :initarg :history)))
 
 (defmethod make-prob-strategy ()
   (make-instance 'prob-strategy))
 
-(defmethod get-sum ((hv integer) (prob-strategy))
+(defmethod get-sum ((hv integer) (prob-strategy prob-strategy))
   (loop for x in (nth hv (history prob-strategy))
      sum x))
 
 (defmethod next-hand ((prob-strategy prob-strategy))
   (let ((handvalue 0)
-	(bet (random (get-sum (current-handvalue prob-strategy)))))
+	(bet (random (get-sum (current-handvalue prob-strategy) prob-strategy))))
     (cond ((< bet (nth (current-handvalue prob-strategy)
 		       (nth 0 (history prob-strategy))))
 	   (setf handvalue 0))
@@ -85,7 +86,7 @@
     (setf (current-handvalue prob-strategy) handvalue)
     (get-hand handvalue)))
 
-(defmethod sutdy ((win boolean) (prob-strategy prob-strategy))
+(defmethod study ((win symbol) (prob-strategy prob-strategy))
   (if win
       (incf (nth (current-handvalue prob-strategy)
 		 (nth (prev-handvalue prob-strategy) (history prob-strategy))))
@@ -110,12 +111,12 @@
   (next-hand (strategy player)))
 
 (defmethod win ((player player))
-  (study ture (strategy player))
+  (study t (strategy player))
   (incf (win-count player))
   (incf (game-count player)))
 
 (defmethod lose ((player player))
-  (study true (strategy player))
+  (study t (strategy player))
   (incf (lose-count player))
   (incf (game-count player)))
 
@@ -124,7 +125,7 @@
 
 
 (defmethod to-string ((player player))
-  (format nil "[ ~A :~Agames, ~Awin, ~Alose]~%"
+  (format nil "[ ~A :~A games, ~A win, ~A lose]~%"
 	  (name player)
 	  (game-count player)
 	  (win-count player)
