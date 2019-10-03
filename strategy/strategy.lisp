@@ -22,7 +22,7 @@
   (make-instance 'hand :handvalue handvalue))
 
 (defmethod fight ((h hand) (hand hand))
-  (cond ((equal h hand) 0)
+  (cond ((= (handvalue h) (handvalue hand)) 0)
 	((= (rem (1+ (handvalue hand)) 3)
 	    (handvalue h))
 	 1)
@@ -51,11 +51,11 @@
 (defmethod next-hand ((won-strategy won-strategy))
   (unless (won won-strategy)
     (setf (prev-hand won-strategy)
-	  (get-hand (random 3)))))
+	  (get-hand (random 3))))
+  (prev-hand won-strategy))
 
 (defmethod study ((win symbol) (won-strategy won-strategy))
   (setf (won won-strategy) win))
-
 
 ;; 一回前の手から次の手を確立的に計算する戦略
 (defclass prob-strategy (strategy)
@@ -102,7 +102,7 @@
    (strategy :accessor strategy :initform nil :initarg :strategy)
    (win-count :accessor win-count :initform 0 :initarg :win-count)
    (lose-count :accessor lose-count :initform 0 :initarg :lose-count)
-   (game-count :accessor game-count :initform 0 :initarg :game-count)))
+   (game-count :accessor game-count :initform 1 :initarg :game-count)))
 
 (defmethod make-player ((name string) (strategy strategy))
   (make-instance 'player :name name :strategy strategy))
@@ -116,7 +116,7 @@
   (incf (game-count player)))
 
 (defmethod lose ((player player))
-  (study t (strategy player))
+  (study nil (strategy player))
   (incf (lose-count player))
   (incf (game-count player)))
 
@@ -125,7 +125,7 @@
 
 
 (defmethod to-string ((player player))
-  (format nil "[ ~A :~A games, ~A win, ~A lose]~%"
+  (format nil "[ ~A :~A games, ~A win, ~A lose]"
 	  (name player)
 	  (game-count player)
 	  (win-count player)
