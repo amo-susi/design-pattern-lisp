@@ -9,7 +9,7 @@
 - [Builder](https://github.com/a-nano/design-pattern-lisp/tree/master/builder)
 - [Abstract Factory](https://github.com/a-nano/design-pattern-lisp/tree/master/abstract-factory)
 - [Bridge](https://github.com/a-nano/design-pattern-lisp/tree/master/bridge)
-- Strategy (Doing)
+- [Strategy](https://github.com/a-nano/design-pattern-lisp/tree/master/strategy)
 - [Composite](https://github.com/a-nano/design-pattern-lisp/tree/master/composite)
 - [Decorator](https://github.com/a-nano/design-pattern-lisp/tree/master/decorator)
 - Visitor (Waiting)
