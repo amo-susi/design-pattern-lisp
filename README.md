@@ -12,7 +12,7 @@
 - [Strategy](https://github.com/a-nano/design-pattern-lisp/tree/master/strategy)
 - [Composite](https://github.com/a-nano/design-pattern-lisp/tree/master/composite)
 - [Decorator](https://github.com/a-nano/design-pattern-lisp/tree/master/decorator)
-- Visitor (Waiting)
+- Visitor (Working)
 - [Chain of Responsibility](https://github.com/a-nano/design-pattern-lisp/tree/master/chain-of-responsibility)
 - [Facade](https://github.com/a-nano/design-pattern-lisp/tree/master/facade)
 - Mediator (Waiting)
