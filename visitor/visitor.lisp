@@ -14,12 +14,6 @@
 (defgeneric get-size (instance))
 (defgeneric accept (v instance))
 
-(defmethod add ((entry entry))
-  (warn "File Treatment Exception"))
-
-(defmethod enumerator ((entry entry))
-  (warn "File TreatmentException"))
-
 (defmethod to-string ((entry entry))
   (format nil "~A (~A)" (get-name entry) (get-size entry)))
 
@@ -38,24 +32,24 @@
   (visit v file))
 
 ;; ディレクトリを表すクラス
-(defclass directory (entry)
+(defclass vdirectory (entry)
   ((name :accessor name :initform "" :initarg :name)
    (dir :accessor dir :initform () :initarg :dir)))
 
-(defmethod make-directory ((name string))
-  (make-instance 'directory :name name))
+(defmethod make-vdirectory ((name string))
+  (make-instance 'vdirectory :name name))
 
-(defmethod get-name ((directory directory))
-  (name directory))
+(defmethod get-name ((vdirectory vdirectory))
+  (name vdirectory))
 
-(defmethod get-size ((directory directory))
-  (apply #'+ (mapcar #'get-size (dir direcory))))
+(defmethod get-size ((vdirectory vdirectory))
+  (apply #'+ (mapcar #'get-size (dir vdirecory))))
 
-(defmethod add ((entry entry) (directory directory))
-  (push entry (dir directory)))
+(defmethod vadd ((entry entry) (vdirectory vdirectory))
+  (push entry (dir vdirectory)))
 
-(defmethod accept ((v visitor) (directory directory))
-  (visit v directory))
+(defmethod accept ((v visitor) (vdirectory vdirectory))
+  (visit v vdirectory))
 
 ;; Visitorクラスのサブクラスで、データ構造の一覧を表示するためのクラス
 (defclass list-visitor (visitor)
@@ -64,9 +58,9 @@
 (defmethod visit ((file file) (list-visitor list-visitor))
   (format t "~A/~A~%" (current-dir list-visitor) (to-string file)))
 
-(defmethod visit ((directory directory) (list-visitor list-visitor))
-  (format t "~A/~A~%" (current-dir list-visitor) (to-string directory))
+(defmethod visit ((vdirectory vdirectory) (list-visitor list-visitor))
+  (format t "~A/~A~%" (current-dir list-visitor) (to-string vdirectory))
   (let* ((savedir (current-dir list-visitor))
-	 ((current-dir list-visitor) (format nil "~A/~A" (current-dir list-visitor) (get-name directory))))
-    (mapcan #'(lambda (v) (accept v list-visitor)) (dir directory))
+	 (current-dir list-visitor) (format nil "~A/~A" (current-dir list-visitor) (get-name vdirectory)))
+    (mapcan #'(lambda (v) (accept v list-visitor)) (dir vdirectory))
     (setf (current-dir list-visitor) savedir)))

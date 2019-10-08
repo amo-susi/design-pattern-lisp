@@ -4,4 +4,4 @@
   :license "LLGPL"
   :components ((:file "package")
 	       (:file "visitor"))
-  :descriptoin "visitor pattern for CLOS")
+  :description "visitor pattern for CLOS")
