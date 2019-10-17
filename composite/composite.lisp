@@ -24,8 +24,7 @@
 
 ;; ファイルを表すクラス
 (defclass file (ientry)
-  ((name :accessor name :initform "" :initarg :name)
-   (entries :accessor entries :initform () :initarg :entries)))
+  ((name :accessor name :initform "" :initarg :name)))
 
 (defmethod make-file ((name string))
   (make-instance 'file :name name))
